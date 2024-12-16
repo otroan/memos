@@ -28,6 +28,7 @@ Where only the first option allows us to selectively use the extra two bytes in 
 
 ## Assumptions
 - Space has to be found vlib_buffer_t. A u16 is likely enough.
+- Both the global error counters and the per-tenant counter will be incremented. Ensuring the total counter is unchanged with the introduction of per-tenant counters.
 - Which "tenant" a packet belonged to has to be determined by a node in the graph, nodes running prior to this node will use tenant index 0.
 - Processing nodes using a new buffer will not by default, they would have to be extended, carry the 3rd dimension index with them.
   Any such packets would be counted against index 0.
@@ -36,6 +37,7 @@ Where only the first option allows us to selectively use the extra two bytes in 
 1. Find a u16 in vlib_buffer_t which is guaranteed to be untrampled through graph traversal
 2. Add /errors/names array
 3. Per tenant error support in error-node.
+4. API to generate the error array for a new tenant. Needs to be called by tenant-aware initialisation code.
 
 ## Simple and combined counters
 
