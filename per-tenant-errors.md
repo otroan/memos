@@ -1,5 +1,7 @@
 # Per-tenant error counters in VPP
 
+[TLDR] _Current thinking is that error counters are per-node, not per-tenant per-node. Only a few nodes are tenant aware, and those should be extended with specific per-tenant counters. While splitting the regular per-node error counters to per-tenant could have some value in identifying tenants with problems, it does not seem that the added number of counters and changes to APIs are worth it._
+
 In VPP we have error counters, simple counters and combined counters. These are all two dimensional. Simple and combined counters are dimensioned
 by thread index and a user selected index, typically software interface index. The error counters use the dimensions of thread index and error index.
 With individual error counter symlinked into the 2d array.
