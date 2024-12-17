@@ -10,6 +10,8 @@ Error counters are a simple u64 packet counter.
 There is a need to split these counters across a 3rd dimension. Some sort of additional context, typically tenant.
 The context has to be set in in the vlib_buffer_t structure.
 
+Current implementation: https://gerrit.fd.io/r/c/vpp/+/42031
+
 ## Implementation choices
 Today we have the global /node/errors. Which is a two dimensional vector of thread index by error code index.
 Alternative 1. Create /node/errors/<n>. Which are replicas of the global error 2d-vector. One per tenant.
