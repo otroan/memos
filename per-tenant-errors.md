@@ -26,6 +26,11 @@ How should the feature be configurable?
 
 Where only the first option allows us to selectively use the extra two bytes in vlib_buffer_t.
 
+In the punt/drop node the error counters are incremented directly from a graph node.
+There is also an API vlib_error_count(vlib_main_t * vm, uword node_index, uword counter, uword increment), which does not have 
+access to vlib_buffer_t. How should that get access to vnet_buffer(b)->tenant_id?
+If signature is changed, it's called > 100 times in the code base.
+
 ## Assumptions
 - Space has to be found vlib_buffer_t. A u16 is likely enough.
 - Both the global error counters and the per-tenant counter will be incremented. Ensuring the total counter is unchanged with the introduction of per-tenant counters.
